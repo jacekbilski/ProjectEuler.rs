@@ -1,26 +1,11 @@
+mod geometry;
+
 pub mod problems {
     use std::fs;
 
+    use crate::geometry::{Triangle, Vertex};
+
     pub fn solve0102() -> usize {
-        #[derive(Debug)]
-        struct Vertex {
-            x: i32,
-            y: i32,
-        }
-
-        #[derive(Debug)]
-        struct Triangle {
-            a: Vertex,
-            b: Vertex,
-            c: Vertex,
-        }
-
-        impl Triangle {
-            fn contains_origin(&self) -> bool {
-                // idea - wszystkie boki muszą mieć (0,0) po tej samej stronie, ew przechodzić przez
-                true
-            }
-        }
 
         let triangles_input = fs::read_to_string("data/p102_triangles.txt").unwrap();
         triangles_input.split("\n")
