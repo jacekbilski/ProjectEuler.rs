@@ -1,7 +1,9 @@
+pub type Coords = i32;
+
 #[derive(Debug)]
 pub struct Vertex {
-    pub x: i32,
-    pub y: i32,
+    pub x: Coords,
+    pub y: Coords,
 }
 
 #[derive(Debug)]
@@ -21,15 +23,22 @@ impl Triangle {
 
 #[cfg(test)]
 mod tests {
-    use crate::geometry::{Triangle, Vertex};
+    use rstest::*;
 
-    #[test]
-    fn contains_origin() {
+    use crate::geometry::{Coords, Triangle, Vertex};
+
+    #[rstest]
+    #[case(- 1, - 1, 1, - 1, 0, 1, true)]
+    fn contains_origin(
+        #[case] ax: Coords, #[case] ay: Coords,
+        #[case] bx: Coords, #[case] by: Coords,
+        #[case] cx: Coords, #[case] cy: Coords,
+        #[case] contains: bool) {
         let t = Triangle {
-            a: Vertex { x: -1, y: -1 },
-            b: Vertex { x: 1, y: -1 },
-            c: Vertex { x: 0, y: 1 },
+            a: Vertex { x: ax, y: ay },
+            b: Vertex { x: bx, y: by },
+            c: Vertex { x: cx, y: cy },
         };
-        assert_eq!(t.contains_origin(), true);
+        assert_eq!(t.contains_origin(), contains);
     }
 }
